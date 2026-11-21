@@ -30,7 +30,7 @@ s · (u, v, 1)^T  =  H · (X, Y, 1)^T        H = K · [ r1  r2  t ]
 
 ## 文档
 
-`docs/` 下三份 Word 说明：
+`docs/` 下的说明文件：
 
 | 文件 | 内容 |
 |---|---|
@@ -60,6 +60,15 @@ python code/calib_k.py
 
 点选顺序：先点 A4 四角，再点桌面四角，回车确认、`u` 撤销、`ESC` 重来。
 结果写入 `data/results/`：`result.csv`、`picks.json`、标注图、俯视校正图、`stats/`、`figures/`。
+
+**从零开始做一遍**：
+
+1. `pip install numpy opencv-python pillow matplotlib`
+2. 拍摄照片放进 `data/`（命名随意，程序按文件名排序）
+3. `python code/measure_table.py --batch "data/*.jpg"` 逐张点选，程序自动解算
+4. 打开 `code/analyze.py`，把**第 19、20 行**的 `TRUE_L`、`TRUE_W` 换成你用卷尺量到的桌面真值
+5. `python code/analyze.py` —— 输出统计表与三联长图
+6. （可选）`python code/calib_k.py` 解内参作为对照实验
 
 ## 精度
 
