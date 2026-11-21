@@ -20,10 +20,10 @@ s · (u, v, 1)^T  =  H · (X, Y, 1)^T        H = K · [ r1  r2  t ]
 
 | 文件 | 作用 |
 |---|---|
-| `geom.py` | 计算层：单应求解（DLT + Hartley 归一化 + SVD）、坐标变换、四边形量算、蒙特卡洛误差预测 |
-| `measure_table.py` | 测量主程序：点选纸角与桌角 → 解 H → 测距 → 标注图 / 俯视校正图 / CSV |
-| `analyze.py` | 误差统计：均值、标准差、MAE/RMSE、相对误差、95% 区间，并绘制三联图 |
-| `calib_k.py` | 附加实验：由多张图像的自标定求解内参 K |
+| `code/geom.py` | 计算层：单应求解（DLT + Hartley 归一化 + SVD）、坐标变换、四边形量算、蒙特卡洛误差预测 |
+| `code/measure_table.py` | 测量主程序：点选纸角与桌角 → 解 H → 测距 → 标注图 / 俯视校正图 / CSV |
+| `code/analyze.py` | 误差统计：均值、标准差、MAE/RMSE、相对误差、95% 区间，并绘制三联图 |
+| `code/calib_k.py` | 附加实验：由多张图像的自标定求解内参 K |
 
 依赖：Python ≥ 3.9，`numpy`、`opencv-python`、`pillow`、`matplotlib`。
 
@@ -45,17 +45,17 @@ s · (u, v, 1)^T  =  H · (X, Y, 1)^T        H = K · [ r1  r2  t ]
 pip install numpy opencv-python pillow matplotlib
 
 # 算法自检（合成数据，不需要照片）
-python measure_table.py --selftest
+python code/measure_table.py --selftest
 
 # 单张 / 批量测量（data/ 下放照片）
-python measure_table.py --img data/01.jpg
-python measure_table.py --batch "data/*.jpg"
+python code/measure_table.py --img data/01.jpg
+python code/measure_table.py --batch "data/*.jpg"
 
 # 误差统计与出图
-python analyze.py
+python code/analyze.py
 
 # 附加：解内参
-python calib_k.py
+python code/calib_k.py
 ```
 
 点选顺序：先点 A4 四角，再点桌面四角，回车确认、`u` 撤销、`ESC` 重来。
@@ -75,6 +75,12 @@ python calib_k.py
 - 长存在约 −3% 的系统性偏小，主要来自桌沿为圆角、角点定义模糊；宽基本无偏。
 - 点选噪声理论上只对应 0.35% 的离散度，实测 3.2%～4.9%，说明误差主体是“点在哪”而非“点得多准”。
 - 多视图自标定在本组数据上呈病态（主点落于画面外），反证了免标定路线的稳健性。
+
+## 目录说明
+
+- `code/` 四个程序，全部从仓库根目录执行，例如 `python code/measure_table.py --selftest`
+- `data/` 自己放照片（01.jpg …），以及可选的 meta.csv；程序会自动建 `data/results/`
+- `docs/` 任务清单、任务指南、原理推导、内容清单
 
 ## 说明
 
