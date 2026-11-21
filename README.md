@@ -27,6 +27,17 @@ s · (u, v, 1)^T  =  H · (X, Y, 1)^T        H = K · [ r1  r2  t ]
 
 依赖：Python ≥ 3.9，`numpy`、`opencv-python`、`pillow`、`matplotlib`。
 
+
+## 文档
+
+`docs/` 下三份 Word 说明：
+
+| 文件 | 内容 |
+|---|---|
+| 任务清单.docx | 整体步骤与先后顺序 |
+| 任务指南.docx | 每一步的具体操作、要改第几行 |
+| 原理推导.docx | 从相机内参矩阵到单应测距的完整推导 |
+
 ## 使用
 
 ```bash
